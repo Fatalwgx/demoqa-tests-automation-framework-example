@@ -1,5 +1,5 @@
 # Locators For /automation-practice-form
-LINK = "/automation-practice-form"
+PRACTICE_PAGE = "/automation-practice-form"
 FIRST_NAME = '#firstName'
 LAST_NAME = '#lastName'
 EMAIL = '#userEmail'

@@ -1,0 +1,10 @@
+# Locators For /webtables
+WEB_TABLES_PAGE = '/webtables'
+BUTTON_ADD = '#addNewRecordButton'
+FIRST_NAME = '#firstName'
+LAST_NAME = '#lastName'
+EMAIL = '#userEmail'
+AGE = '#age'
+SALARY = '#salary'
+DEPARTMENT = '#department'
+SUBMIT_BUTTON = '#submit'
