@@ -1,10 +1,9 @@
 from selene.support.shared import browser
 from selene import have
 from demoqa_tests.model.app import open_browser
-from pages.locators_web_tables import *
-from pages.web_tables_page import get_row_group
-from pages.web_tables_page import edit_row
-from pages.web_tables_page import delete_row
+from demoqa_tests.model.pages.web_tables_page import get_row_group
+from demoqa_tests.model.pages.web_tables_page import edit_row
+from demoqa_tests.model.pages.web_tables_page import delete_row
 
 
 def test_webtable_operations():
