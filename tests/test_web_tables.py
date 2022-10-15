@@ -1,4 +1,4 @@
-from selene.support.shared import browser
+"""from selene.support.shared import browser
 from selene import have
 from demoqa_tests.model.app import open_browser
 from demoqa_tests.model.pages.web_tables_page import get_row_group
@@ -26,3 +26,4 @@ def test_webtable_operations():
     browser.element(SUBMIT_BUTTON).click()
     browser.element(delete_row(3)).click()
     browser.element(get_row_group(3) + ' .rt-td:nth-child(1)').should(have.text('Lev'))
+"""
