@@ -1,4 +1,8 @@
 import os
+from pathlib import Path
 
-def path_to_test_picture(relative_path):
-    return os.path.abspath(relative_path)
+import resources
+
+
+def to_resource(relative_path):
+    return str(Path(resources.__file__).parent.joinpath(relative_path).absolute())

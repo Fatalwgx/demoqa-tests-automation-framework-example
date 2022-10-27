@@ -1,6 +1,17 @@
+import datetime
+
 from selene.support.shared import browser
-from demoqa_tests.model.controls import dropdown
+
+from demoqa_tests import utils
+from demoqa_tests.model.controls import dropdown, radio_button, datepicker, checkbox, file_input, tags_input
 from selene import be
+
+from demoqa_tests.utils.selene.conditions import match
+from demoqa_tests.model.data import user
+from demoqa_tests.utils.selene import action
+
+
+birthday = browser.element('#dateOfBirthInput')
 
 
 def fill_fullname(firstname: str, lastname: str):
@@ -12,9 +23,8 @@ def fill_phone(phone: str):
     browser.element('#userNumber').type(phone)
 
 
-def fill_subjects(subjects: tuple):
-    for item in subjects:
-        browser.element('#subjectsInput').type(item).press_enter().press_escape()
+def fill_subjects(*subjects: user.Subjects):
+    tags_input.add(browser.element('#subjectsInput'), *[subject.value for subject in subjects])
 
 
 def fill_address(address):
@@ -22,19 +32,40 @@ def fill_address(address):
 
 
 def select_state(state: str):
-    element = browser.element('#state')
-    dropdown.select(element, state)
+    utils.browser_extensions.scroll_one_page()
+    dropdown.select(browser.element('#state'), state)
 
 
 def select_city(city: str):
-    element = browser.element('#city')
-    dropdown.select(element, city)
+    dropdown.select(browser.element('#city'), city)
 
 
 def submit_form():
-    browser.execute_script('window.scrollTo(0, document.body.scrollHeight)')
+    utils.browser_extensions.scroll_one_page()
     browser.element('#submit').click()
 
 
 def assert_form_sent():
     browser.element('.modal-body').should(be.visible)
+
+
+def fill_gender(value: user.Gender):
+    radio_button.set_option('gender', value.value)   # noqa
+
+
+def fill_birthday(date: datetime.date):
+    datepicker.set_date(birthday, date)
+
+
+def assert_filled_birthday(date: datetime.date):
+    birthday.should(match.date(date))
+
+
+def fill_hobbies(*options: user.Hobby):
+    checkbox.check_options(
+        browser.all('[for^=hobbies-checkbox]'), *[option.value for option in options]
+    )
+
+
+def select_picture(relative_path):
+    file_input.upload(relative_path)
