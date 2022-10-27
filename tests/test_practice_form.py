@@ -1,23 +1,28 @@
-from demoqa_tests.model.app import given_opened_browser
-from demoqa_tests.model.pages.practice_page import *
-from demoqa_tests.model.controls import datepicker, radio_button, checkbox, file_attribute
+import datetime
+
+from demoqa_tests.model import app
+from demoqa_tests.model.data import user
+from demoqa_tests.model.data.user import Gender
+from demoqa_tests.model.pages import practice_page
 
 
 def test_submit_filled_form():
+
     # GIVEN
-    given_opened_browser('/automation-practice-form')
-    #WHEN
-    fill_fullname('Lev', 'Zavodskov')
-    radio_button.set_option(1)
-    fill_phone('70000000000')
-    datepicker.set_date('29 Jul 1997')
-    fill_subjects(('Math', 'English', 'Computer Science'))
-    checkbox.check_option(('Music', 'Reading'))
-    file_attribute.upload('../resources/picture.png')
-    fill_address('Country/State/City/Street/ Street num')
-    browser.execute_script('window.scrollTo(0, document.body.scrollHeight)')
-    select_state('NCR')
-    select_city('Gurgaon')
-    submit_form()
-    #THEN
-    assert_form_sent()
+    app.given_opened('/automation-practice-form')
+
+    # WHEN
+    practice_page.fill_fullname('Lev', 'Zavodskov')
+    practice_page.fill_gender(Gender.Male)
+    practice_page.fill_phone('70000000000')
+    practice_page.fill_birthday(datetime.date(1997, 7, 29))
+    practice_page.fill_subjects(user.Subjects.Math, user.Subjects.English, user.Subjects.Computer_science)
+    practice_page.fill_hobbies(user.Hobby.Music, user.Hobby.Reading)
+    practice_page.select_picture('../resources/picture.png')
+    practice_page.fill_address('Country/State/City/Street/ Street num')
+    practice_page.select_state('NCR')
+    practice_page.select_city('Gurgaon')
+    practice_page.submit_form()
+
+    # THEN
+    practice_page.assert_form_sent()
