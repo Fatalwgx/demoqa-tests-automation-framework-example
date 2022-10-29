@@ -1,4 +1,5 @@
 import datetime
+import time
 
 from demoqa_tests.model import app
 from demoqa_tests.model.data import user
@@ -13,12 +14,13 @@ def test_submit_filled_form():
 
     # WHEN
     practice_page.fill_fullname('Lev', 'Zavodskov')
+    practice_page.fill_email('email@example.com')
     practice_page.fill_gender(Gender.Male)
     practice_page.fill_phone('70000000000')
     practice_page.fill_birthday(datetime.date(1997, 7, 29))
     practice_page.fill_subjects(user.Subjects.Math, user.Subjects.English, user.Subjects.Computer_science)
     practice_page.fill_hobbies(user.Hobby.Music, user.Hobby.Reading)
-    practice_page.select_picture('../resources/picture.png')
+    practice_page.select_picture('picture.png')
     practice_page.fill_address('Country/State/City/Street/ Street num')
     practice_page.select_state('NCR')
     practice_page.select_city('Gurgaon')

@@ -3,9 +3,10 @@ import datetime
 from selene.support.shared import browser
 
 from demoqa_tests import utils
-from demoqa_tests.model.controls import dropdown, radio_button, datepicker, checkbox, file_input, tags_input
+from demoqa_tests.model.controls import dropdown, radio_button, datepicker, checkbox, tags_input
 from selene import be
 
+from demoqa_tests.utils import files
 from demoqa_tests.utils.selene.conditions import match
 from demoqa_tests.model.data import user
 from demoqa_tests.utils.selene import action
@@ -17,6 +18,10 @@ birthday = browser.element('#dateOfBirthInput')
 def fill_fullname(firstname: str, lastname: str):
     browser.element('#firstName').type(firstname)
     browser.element('#lastName').type(lastname)
+
+
+def fill_email(address: str):
+    browser.element('#userEmail').type(address)
 
 
 def fill_phone(phone: str):
@@ -67,5 +72,5 @@ def fill_hobbies(*options: user.Hobby):
     )
 
 
-def select_picture(relative_path):
-    file_input.upload(relative_path)
+def select_picture(file_name):
+    browser.element('#uploadPicture').send_keys(files.to_resource(f'{file_name}'))
