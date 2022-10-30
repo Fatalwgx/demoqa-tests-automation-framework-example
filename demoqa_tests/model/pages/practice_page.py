@@ -41,12 +41,13 @@ def select_state(state: str):
 
 
 def select_city(city: str):
+    utils.browser_extensions.scroll_one_page()
     dropdown.select(browser.element('#city'), city)
 
 
 def submit_form():
     utils.browser_extensions.scroll_one_page()
-    browser.element('#submit').click()
+    browser.element('#submit').press_enter()
 
 
 def assert_form_sent():
