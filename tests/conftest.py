@@ -7,10 +7,6 @@ from demoqa_tests.utils import attach
 from selenium.webdriver.chrome.options import Options
 
 
-login = os.getenv('LOGIN')
-password = os.getenv('PASSWORD')
-
-
 def pytest_addoption(parser):
     parser.addoption(
         '--browser',
@@ -39,6 +35,9 @@ def setup_browser(request):
     }
 
     options.capabilities.update(selenoid_capabilities)
+
+    login = os.getenv('LOGIN')
+    password = os.getenv('PASSWORD')
 
     driver = webdriver.Remote(
         command_executor=f"https://{login}:{password}@selenoid.autotests.cloud/wd/hub",
