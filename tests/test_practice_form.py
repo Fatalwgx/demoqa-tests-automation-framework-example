@@ -1,5 +1,4 @@
 import datetime
-import time
 
 from demoqa_tests.model import app
 from demoqa_tests.model.data import user

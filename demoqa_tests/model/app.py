@@ -8,5 +8,5 @@ from demoqa_tests.utils.selene import action
 def given_opened(url):
     browser.open(url)
     ads = ss('[id^=google_ads][id$=container__]')
-    if ads.with_(timeout=10).wait.until(have.size_greater_than_or_equal(3)):
+    if ads.with_(timeout=15).wait.until(have.size_greater_than_or_equal(3)):
         ads.perform(action.js.remove)

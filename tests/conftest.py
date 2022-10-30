@@ -12,16 +12,26 @@ login = os.getenv('LOGIN')
 password = os.getenv('PASSWORD')
 
 
+def pytest_addoption(parser):
+    parser.addoption(
+        '--browser',
+        help='Select browser to run tests',
+        choices=['firefox', 'chrome'],
+        default='chrome'
+    )
+
+
 @pytest.fixture(scope='session', autouse=True)
 def load_env():
     load_dotenv()
 
 
 @pytest.fixture(scope='function', autouse=True)
-def setup_browser():
+def setup_browser(request):
+    browser_name = request.config.getoption('--browser')
     options = Options()
     selenoid_capabilities = {
-        "browserName": "chrome",
+        "browserName": browser_name,
         "browserVersion": "100.0",
         "selenoid:options": {
             "enableVNC": True,
@@ -32,13 +42,12 @@ def setup_browser():
     options.capabilities.update(selenoid_capabilities)
 
     driver = webdriver.Remote(
-        command_executor=f"https://{login}:{password}@selenoid.autotests.cloud/wd/hub",
+        command_executor=f"https://user1:1234@selenoid.autotests.cloud/wd/hub",
         options=options
     )
     browser.config.driver = driver
 
     browser.config.base_url = 'https://demoqa.com'
-    browser.config.browser_name = 'chrome'
     browser.config.window_height = '1080'
     browser.config.window_width = '1920'
 

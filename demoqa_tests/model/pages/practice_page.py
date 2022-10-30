@@ -9,7 +9,6 @@ from selene import be
 from demoqa_tests.utils import files
 from demoqa_tests.utils.selene.conditions import match
 from demoqa_tests.model.data import user
-from demoqa_tests.utils.selene import action
 
 
 birthday = browser.element('#dateOfBirthInput')
