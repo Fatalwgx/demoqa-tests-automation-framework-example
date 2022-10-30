@@ -4,7 +4,7 @@ from selene.support.shared import browser
 
 from demoqa_tests import utils
 from demoqa_tests.model.controls import dropdown, radio_button, datepicker, checkbox, tags_input
-from selene import be
+from selene import be, command
 
 from demoqa_tests.utils import files
 from demoqa_tests.utils.selene.conditions import match
@@ -47,7 +47,7 @@ def select_city(city: str):
 
 def submit_form():
     utils.browser_extensions.scroll_one_page()
-    browser.element('#submit').press_enter()
+    browser.element('#submit').perform(command.js.click)
 
 
 def assert_form_sent():
