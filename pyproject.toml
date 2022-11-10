@@ -1,2 +1,22 @@
+[tool.poetry]
+name = "demoqa-tests-automation-framework-example"
+version = "0.1.0"
+description = ""
+authors = ["Fatalwgx <nothingfatalleo@gmail.com>"]
+readme = "README.md"
+packages = [{include = "demoqa_tests_automation_framework_example"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pytest = "^7.2.0"
+selene = "2.0.0b14"
+allure-pytest = "^2.11.1"
+python-dotenv = "^0.21.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
 [tool.pytest.ini_options]
-addopts = "--alluredir=allure-results"
+addopts = "--alluredir=allure-results --clean-alluredir"
